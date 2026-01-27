@@ -231,16 +231,4 @@ All routes below require authentication.
 | 401    | You are not authorized to delete this task |
 
 ---
-
-# Global Error Format
-
-```json
-{
-  "data": null,
-  "error": {
-    "message": "Error message",
-    "code": 401
-  }
-}
-```
 ✅ This ensures predictable, production-ready error handling across the API.
