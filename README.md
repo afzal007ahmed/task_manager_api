@@ -7,7 +7,7 @@ This document describes the **request format, success responses, and error respo
 ## Base URL
 
 ```
-/api
+/
 ```
 
 ---
@@ -243,56 +243,4 @@ All routes below require authentication.
   }
 }
 ```
-
----
-
-## Error Handling
-
-### Global Error Middleware
-
-All application errors are handled using a centralized Express error middleware.
-
-#### Middleware Code
-
-```js
-const errorMiddleware = (err, req, res, next) => {
-  const errorMessage = err.message || "Something went wrong.";
-  const errorStatus = err.code || 500;
-
-  res.status(errorStatus).send({
-    message: errorMessage,
-  });
-};
-
-module.exports = { errorMiddleware };
-```
-
----
-
-### Standard Error Response Format
-
-````json
-{
-  "message": "Error message"
-}
-```json
-{
-  "data": null,
-  "error": {
-    "message": "Error message",
-    "code": 401
-  }
-}
-````
-
----
-
-### Middleware Registration
-
-```js
-app.use(errorMiddleware);
-```
-
----
-
 ✅ This ensures predictable, production-ready error handling across the API.
