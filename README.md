@@ -231,4 +231,3 @@ All routes below require authentication.
 | 401    | You are not authorized to delete this task |
 
 ---
-✅ This ensures predictable, production-ready error handling across the API.
