@@ -4,11 +4,13 @@ const cors = require('cors') ;
 const { errorMiddleware } = require("./middleware/error.middleware");
 const { indexRouter } = require("./routes");
 const { config } = require("./config");
+const morgan = require('morgan') ;
 const { healthRouter } = require("./routes/health");
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+app.use(morgan('dev')) ;
 
 //cors 
 app.use( cors({
