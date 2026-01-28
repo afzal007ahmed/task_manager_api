@@ -1,3 +1,4 @@
+const { config } = require("../config");
 const { authServices } = require("../services/auth.services");
 const jwt = require("jsonwebtoken");
 
@@ -16,7 +17,7 @@ const authController = {
   login: async (req, res , next ) => {
     try {
       const user = await authServices.login(req.body);
-      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      const token = jwt.sign({ id: user.id }, config.jwt.secret, {
         expiresIn: 60 * 60,
       });
 
