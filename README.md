@@ -18,6 +18,10 @@ nodemon server.js or node server.js
 
 
 
+
+
+
+
 This describes the **request format, success responses, and error responses** for the Tasks & Auth APIs.
 
 ---
@@ -59,7 +63,7 @@ This describes the **request format, success responses, and error responses** fo
 
 | Status | Message                            |
 | ------ | ---------------------------------- |
-| 403    | Please provide name/email/password |
+| 400    | Please provide name/email/password |
 | 500    | Something went wrong               |
 
 ---
@@ -92,7 +96,7 @@ This describes the **request format, success responses, and error responses** fo
 
 | Status | Message                       |
 | ------ | ----------------------------- |
-| 403    | Please provide email/password |
+| 400    | Please provide email/password |
 | 404    | user not found                |
 | 401    | Password mismatch             |
 
@@ -168,7 +172,7 @@ All routes below require authentication.
 
 | Status | Message                                      |
 | ------ | -------------------------------------------- |
-| 403    | Please provide title/priority/status/dueDate |
+| 400    | Please provide title/priority/status/dueDate |
 
 ---
 
@@ -195,7 +199,7 @@ All routes below require authentication.
 
 | Status | Message                                         |
 | ------ | ----------------------------------------------- |
-| 401    | You are not authorized to see this task details |
+| 403    | You are not authorized to see this task details |
 
 ---
 
@@ -225,7 +229,7 @@ All routes below require authentication.
 
 | Status | Message                                                |
 | ------ | ------------------------------------------------------ |
-| 401    | You are not authorized to make any update to this task |
+| 403   | You are not authorized to make any update to this task |
 
 ---
 
@@ -246,6 +250,6 @@ All routes below require authentication.
 
 | Status | Message                                    |
 | ------ | ------------------------------------------ |
-| 401    | You are not authorized to delete this task |
+| 403    | You are not authorized to delete this task |
 
 ---
