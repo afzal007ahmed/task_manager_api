@@ -1,4 +1,4 @@
-const { usersModelOperations } = require("../models/users")
+const { usersModelOperations } = require("../db-operations/users")
 
 const authServices = {
     register : async( body ) => {

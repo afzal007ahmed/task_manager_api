@@ -1,6 +1,6 @@
 const { Op } = require("sequelize");
-const { sequelize } = require("../config/sequelize.config");
-const { tasks } = require("./index");
+const { tasks } = require("../models/index");
+const { sequelize } = require("../connection/sequelize");
 
 const tasksModelOperations = {
   getAll: async (
@@ -58,19 +58,19 @@ const tasksModelOperations = {
     const err = new Error("Something went wrong.")
     if (!body.title || !body.title.trim().length) {
       err.message = "Please provide title"
-      err.code = 403 ;
+      err.code = 400 ;
       throw err ;
     } else if (!body.priority || !body.priority.trim().length) {
       err.message = "Please provide priority"
-      err.code = 403 ;
+      err.code = 400 ;
       throw err ;
     } else if (!body.dueDate || !body.dueDate.trim().length) {
       err.message = "Please provide dueDate"
-      err.code = 403 ;
+      err.code = 400 ;
       throw err ;
     } else if (!body.status || !body.status.trim().length) {
       err.message = "Please provide status"
-      err.code = 403 ;
+      err.code = 400 ;
       throw err ;
     }
     await tasks.create({

@@ -1,4 +1,4 @@
-const { tasksModelOperations } = require("../models/tasks")
+const { tasksModelOperations } = require("../db-operations/tasks")
 
 const tasksServices = {
     getAll : async(orderBy , orderByValue , filterBy ,filterByValue,from,to , userId , page ) => {

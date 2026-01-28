@@ -27,7 +27,7 @@ const tasksController = {
     try {
       const { id } = req.user;
       await tasksServices.createTask(req.body, id);
-      res.status(200).send({
+      res.status(201).send({
         success: true,
         error: null,
       });
@@ -40,7 +40,7 @@ const tasksController = {
       const creatorId = await userServices.getTaskCreator(req.params.id);
       if (req.user.id !== creatorId) {
         const err = new Error("You are not authorized to see this task details.");
-        err.code = 401 ;
+        err.code = 403 ;
         throw err ;
       }
       const response = await tasksServices.getTaskById(req.params.id);
@@ -57,7 +57,7 @@ const tasksController = {
       const taskCreator = await userServices.getTaskCreator(req.params.id);
       if (taskCreator !== req.user.id) {
         const err = new Error("You are not authorized to make any update to this task.");
-        err.code = 401;
+        err.code = 403;
         throw err ;
       }
       await tasksController.updateTaskById(req.params.id);
@@ -74,7 +74,7 @@ const tasksController = {
       const taskCreator = await userServices.getTaskCreator(req.params.id);
       if (taskCreator !== req.user.id) {
         const err = new Error("You are not authorized to delete this task.");
-        err.code = 401;
+        err.code = 403;
         throw err ;
       }
       await tasksServices.deleteTaskById(req.params.id);

@@ -1,6 +1,24 @@
 # Tasks Management API Documentation
 
-This document describes the **request format, success responses, and error responses** for the Tasks & Auth APIs.
+
+# Clone Project 
+
+git clone https://github.com/afzal007ahmed/task_manager_api.git
+
+
+# Packages 
+
+npm install
+
+
+# Run the server 
+
+nodemon server.js or node server.js 
+
+
+
+
+This describes the **request format, success responses, and error responses** for the Tasks & Auth APIs.
 
 ---
 

@@ -1,13 +1,14 @@
 require("dotenv").config();
 const { app } = require("./app");
+const { config } = require("./config/index.js");
+const { sequelize } = require("./connection/sequelize.js");
 require("./models/index.js");
-const { sequelize } = require("./config/sequelize.config");
 
 async function Server() {
   await sequelize.sync();
 
-  app.listen(process.env.PORT, () => {
-    console.log("Server listening at port : ", process.env.PORT);
+  app.listen(config.port, () => {
+    console.log("Server listening at port : ", config.port);
   });
 }
 
