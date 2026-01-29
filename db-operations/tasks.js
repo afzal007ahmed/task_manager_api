@@ -1,77 +1,77 @@
-const { Op } = require("sequelize");
-const { tasks } = require("../models/index");
-const { sequelize } = require("../connection/sequelize");
+const {Op} = require('sequelize');
+const {tasks} = require('../models/index');
+const {sequelize} = require('../connection/sequelize');
 
 const tasksModelOperations = {
   getAll: async (
-    orderBy,
-    orderByValue,
-    filterBy,
-    filterByValue,
-    from,
-    to,
-    userId,
-    page,
+      orderBy,
+      orderByValue,
+      filterBy,
+      filterByValue,
+      from,
+      to,
+      userId,
+      page,
   ) => {
-    let obj = { userId: userId };
-    let limit = {} ;
-    if( page ) {
-      limit = {...limit , limit: page * 10, offset: (page - 1) * 10 } ;
+    let obj = {userId: userId};
+    let limit = {};
+    if (page) {
+      limit = {...limit, limit: page * 10, offset: (page - 1) * 10};
     }
-    if (filterBy === "dueDate") {
+    if (filterBy === 'dueDate') {
       obj[filterBy] = {};
       if (from) obj[filterBy][Op.gt] = new Date(from);
       if (to) obj[filterBy][Op.lt] = new Date(to);
     } else {
       obj =
-        filterBy && filterByValue
-          ? { ...obj, [filterBy]: filterByValue }
-          : { ...obj };
+        filterBy && filterByValue ?
+          {...obj, [filterBy]: filterByValue} :
+          {...obj};
     }
     if (orderBy && orderByValue) {
-      if (orderBy === "priority") {
+      if (orderBy === 'priority') {
         return await tasks.findAll({
           where: obj,
           order: [
             [
               sequelize.literal(
-                `case priority when 'low' then 1 when 'medium' then 2 when 'high' then 3 end`,
+                  'case priority when \'low\' then 1 when \'medium\' then 2 when \'high\' then 3 end',
               ),
               orderByValue,
             ],
           ],
-          ...limit
+          ...limit,
         });
       }
       return await tasks.findAll({
         where: obj,
         order: [[orderBy, orderByValue]],
-        ...limit
+        ...limit,
       });
     }
     return await tasks.findAll({
       where: obj,
-      ...limit
+      ...limit,
     });
   },
   createTask: async (body, userId) => {
-    const err = new Error("Something went wrong.")
+    const err = new Error('Something went wrong.');
     if (!body.title || !body.title.trim().length) {
-      err.message = "Please provide title"
-      err.code = 400 ;
-      throw err ;
+      err.message = 'Please provide title';
+      err.code = 400;
+      throw err;
     } else if (!body.priority || !body.priority.trim().length) {
-      err.message = "Please provide priority"
-      err.code = 400 ;
-      throw err ;
+      err.message = 'Please provide priority';
+      err.code = 400;
+      throw err;
     } else if (!body.dueDate || !body.dueDate.trim().length) {
-      err.message = "Please provide dueDate"
-      err.code = 400 ;
-      throw err ;
+      err.message = 'Please provide dueDate';
+      err.code = 400;
+      throw err;
     } else if (!body.status || !body.status.trim().length) {
-      err.message = "Please provide status"
-      err.code = 400 ;
-      throw err ;
+      err.message = 'Please provide status';
+      err.code = 400;
+      throw err;
     }
     await tasks.create({
       title: body.title,
@@ -83,7 +83,7 @@ const tasksModelOperations = {
     });
   },
   taskById: async (id) => {
-    const data = await tasks.findOne({ where: { id: id } });
+    const data = await tasks.findOne({where: {id: id}});
     return data.dataValues;
   },
   updateTaskById: async (id, body) => {
@@ -104,11 +104,11 @@ const tasksModelOperations = {
       obj[body.status] = body.status;
     }
 
-    await tasks.update(obj, { where: { id: id } });
+    await tasks.update(obj, {where: {id: id}});
   },
   deleteTaskById: async (id) => {
-    await tasks.destroy({ where: { id: id } });
+    await tasks.destroy({where: {id: id}});
   },
 };
 
-module.exports = { tasksModelOperations };
+module.exports = {tasksModelOperations};

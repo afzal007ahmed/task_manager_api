@@ -1,0 +1,13 @@
+{
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "extends": ["google"],
+  "rules": {
+    "require-jsdoc": "off",
+    "max-len": ["error", { "code": 120 }],
+    "quotes": ["error", "single"],
+    "new-cap" : "off"
+  }
+}
