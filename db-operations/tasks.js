@@ -1,6 +1,6 @@
 const {Op} = require('sequelize');
 const {tasks} = require('../models/index');
-const {sequelize} = require('../connection/sequelize');
+const {sequelize} = require('../connections/sequelize');
 
 const tasksModelOperations = {
   getAll: async (

@@ -1,7 +1,7 @@
 const {DataTypes} = require('sequelize');
 const {userModel} = require('./user.model');
 const {tasksModel} = require('./tasks.model');
-const {sequelize} = require('../connection/sequelize');
+const {sequelize} = require('../connections/sequelize');
 
 
 const users = userModel(sequelize, DataTypes);

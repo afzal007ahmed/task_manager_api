@@ -2,7 +2,7 @@ require('dotenv').config();
 const {app} = require('./app');
 const {config} = require('./config/index.js');
 const {logger} = require('./config/winston.config.js');
-const {sequelize} = require('./connection/sequelize.js');
+const {sequelize} = require('./connections/sequelize.js');
 require('./models/index.js');
 
 async function Server() {
